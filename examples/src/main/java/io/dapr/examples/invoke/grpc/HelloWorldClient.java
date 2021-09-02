@@ -34,7 +34,11 @@ public class HelloWorldClient {
         String message = "Message #" + (count++);
         System.out.println("Sending message: " + message);
         client.invokeMethod(serviceAppId, method, message, HttpExtension.NONE).block();
+        //System.out.println("Message sent: " + message);
+        byte[] response = client.invokeMethod(serviceAppId, method, message, HttpExtension.NONE, null,
+                byte[].class).block();
         System.out.println("Message sent: " + message);
+        System.out.println("Message receive: " + new String(response));
 
         Thread.sleep(1000);
 
